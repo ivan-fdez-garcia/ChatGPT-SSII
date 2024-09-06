@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Defines the character set used in the document -->
+    <meta charset="UTF-8">
+    <!-- Sets the viewport to the width of the device, with an initial zoom level of 1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The title of the page that will appear on the browser tab -->
+    <title>ChatGPT-SSII</title>
+    <!-- Internal styles for the page -->
+    <style>
+        /* Removes margin and padding from the page and ensures it takes up the full height */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        /* Style for the Voiceflow chat widget container */
+        #vf-chat-widget-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container for the Voiceflow chat widget -->
+    <div id="vf-chat-widget-container">
+        <!-- Script to load and initialize the Voiceflow chat widget -->
+        <script type="text/javascript">
+            (function(d, t) {
+                // Create a new script element and get the first existing script element in the document
+                var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                // Define a function to run once the script has loaded
+                v.onload = function() {
+                    // Load the Voiceflow chat widget with the specified settings
+                    window.voiceflow.chat.load({
+                        verify: { projectID: process.env.VOICEFLOW_PROJECT_ID }, // Voiceflow project ID
+                        url: 'https://general-runtime.voiceflow.com', // Voiceflow general runtime URL
+                        versionID: 'production', // Project version (can be 'production' or a specific version)
+                        render: { mode: 'embedded', target: document.body }, // Render the chat widget embedded in the document body
+                        autostart: false // The chat does not start automatically
+                    });
+                }
+                // Set the script's source URL and type
+                v.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
+                v.type = "text/javascript";
+                // Insert the new script before the first existing script in the document
+                s.parentNode.insertBefore(v, s);
+            })(document, 'script');
+        </script>
+    </div>
+</body>
+</html>
